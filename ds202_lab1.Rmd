@@ -1,0 +1,9 @@
+---
+title: "Chocolatae_rating"
+author: "Carlos A. Gonzalez"
+date: "9/12/2019"
+output: html_document
+
+choco =  read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+plot(choco$Rating,choco$Cocoa.Pct, xlab = "Ratings", ylab = "Cocoa Percentage", pch = 2, cex=2)
+
