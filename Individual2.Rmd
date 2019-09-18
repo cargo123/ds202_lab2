@@ -30,14 +30,13 @@ You can load the data into your session using the command below:
 choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
 head(choco)
 ```
+
 ```{r}
 summary(choco)
 
 typeof(choco$Company.Location)
 ```
-```{r}
-plot(choco$rating,choco$Cocoa.Pct )
-```
+
 
 ## Question set (individual)
 
@@ -46,8 +45,17 @@ Coordinate with your teammate and decide among you who is Individual 1 and Indiv
 **For each of the questions below provide at least one graphic as a basis for your answer.**
 
 1. How are ratings distributed? Don't forget to mention outliers, if there are any.
-There does not seem to be a strong distribution. But the ratings are clustered around ratings 2 and 4 and percentages are clustered from 55 to 85. With outliers at ratings 5 and 1.
-2. Do ratings depend on the cacao percentage of a chocolate bar? 
+```{r}
+plot(choco$Rating,choco$Cocoa.Pct, xlab = "Ratings", ylab = "Cocoa Percentage", pch = 2, cex=2) 
+```
+There does not seem to be a strong distribution. 
+But the ratings are clustered around ratings 2 and 4 and percentages are clustered from 55 to 85. 
+With outliers at ratings 5 and 1.
+
+2. Do ratings depend on the cacao percentage of a chocolate bar?
+```{r}
+plot(choco$Rating,choco$Cocoa.Pct, xlab = "Ratings", ylab = "Cocoa Percentage", pch = 2, cex=2) 
+```
 No, they do not. There is no trend.
 
 3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.)
@@ -67,7 +75,6 @@ When the above is finished, **Individual 2:**
 3. Add `individual2.Rmd` and `individual2.html` to the local repo, and push to your team member's Github repo (Individual 1).
 
 ## Question set (team)
-
 Discuss how to approach the following questions with your teammate. When finished, both teammate should collaborate on a single `team.Rmd` file which include the answers to the following questions. 
 
 ### Tips on coordinating as a team: 
@@ -88,22 +95,23 @@ If you are stuck, you can always go to R's help documentation.
 
 
 ```{r, eval=FALSE}
-recent_rating = choco[choco$Review.Date>2011,]
+recent_rating = choco[choco$Review.Date>2011,] #creating a new dataset from the choco data set of the review dates which are greater than 2011
 
-unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 
+unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? there are 54 countries listed but there are 61 levels
+#length(unique(recent_rating$Company.Location))
 
-recent_rating$Company.Location = droplevels(recent_rating$Company.Location)
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location) # the function droplevels, gets rid of the levels that are not being used or are empty. so now the number of countries listed is the same as the number of levels which is 54. So this line of code is redefining the variable company.location to have only the 54 levels of the countries listed.
 
-head(recent_rating)
+head(recent_rating) #shows a preview of the data set.
 
-cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location)
-cross_table
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location) #creates a table with the review.date as the rows and company.location as the columns. The values within the table are the ratings for that location during that specific year.
+cross_table #displays the table
 
-which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0)
+which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0) # this statement is telling us the position or column of the countries in this table that do not have a 0 rating in the first 5 rows or years.
 
-france_recent = subset(recent_rating,Company.Location =='France')
-uk_recent = subset(recent_rating,Company.Location =='U.K.')
-germany_recent = subset(recent_rating,Company.Location=='Germany')
+france_recent = subset(recent_rating,Company.Location =='France') # creating a subset from the dataset recent_rating that only includes the country France.
+uk_recent = subset(recent_rating,Company.Location =='U.K.') #creating a subset from the dataset recent_rating that only includes the U.K.
+germany_recent = subset(recent_rating,Company.Location=='Germany') #creating a subset from the dataset recent_rating that only includes Germany.
 
 par(mfrow=c(2,2))
 color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green')
