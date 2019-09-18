@@ -131,7 +131,7 @@ You can load the data into your session using the command below:
 
   
 
-  ```{r}
+```{r}
 
 choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
 
@@ -160,7 +160,10 @@ Coordinate with your teammate and decide among you who is Individual 1 and Indiv
 
 3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.) 
 
+The class of the variable is integer, this differs from a character variable in the way that R stores the variable.
 
+typeof(choco$Company.Location)
+typeof(newchoco$Company.Location)
 ## Collaborating on a GitHub repository
 
 

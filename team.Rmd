@@ -67,15 +67,48 @@ legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yello
 the plots could be improved by moving the legend to a spot on the plot so it is not covering up any data points.
 
 3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
+based on the histogram of the recent ratings by review date the number of ratings per year seem to increase from 2013 to 2015 and then the decrease from 2015 to 2017 and in 2017 they number is at its lowest from the 6 years.
 ```{r}
 #hist(recent_rating$Review.Date)
 ```
 
 4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
+The US has the most number of ratings overall followed France and then out of the three Canada has the least number of ratings. 
+Looking at the distribution of the ratings, they all have similar means, but differing ranges.
+```{r}
+newchoco <- choco[which(choco$Company.Location %in% c('U.S.A.', 'Canada', 'France')),]
+newchoco$Company.Location <- droplevels(newchoco$Company.Location)
+plot(newchoco$Rating~newchoco$Company.Location)
+summary(newchoco$Rating)
+```
+```{r}
+plot(newchoco$Company.Location~newchoco$Rating)
+```
+
+
 
 5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
+Which country has the biggest range of ratings?
+
 6 \. Bonus points (optional): Answer the question from the dataset.
+
+Their is a tie for the largest range in ratings between Canada and the USA, France has the smallest one.
+```{r}
+canada<-newchoco[which(choco$Company.Location == 'Canada'),]
+summary(canada$Rating)
+``` 
+
+```{r}
+usa <-newchoco[which(choco$Company.Location == 'U.S.A.'),]
+summary(usa$Rating)
+```
+
+```{r}
+france<-newchoco[which(choco$Company.Location == 'France'),]
+summary(france$Rating)
+```
+
 
 ## Submission
 
