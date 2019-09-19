@@ -156,11 +156,11 @@ Coordinate with your teammate and decide among you who is Individual 1 and Indiv
 1. How are ratings distributed? Don't forget to mention outliers, if there are any. They are cluster between rating 2 and 4 also percentage wise it would be between 55 through 90.  Outliere are 100 percent cocao and 1,5 ratings.
 
 2. Do ratings depend on the cacao percentage of a chocolate bar? 
-  No it would not.
+  No it would not because the data shows they are all clustered together.
 
-3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.) 
+3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.) The class would be integer becase integer holds a value of some type whole character is just a string.
 
-The class of the variable is integer, this differs from a character variable in the way that R stores the variable.
+
 
 typeof(choco$Company.Location)
 typeof(newchoco$Company.Location)
